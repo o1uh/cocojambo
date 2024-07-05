@@ -32,6 +32,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.box_cells = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.b_green = new System.Windows.Forms.Button();
             this.b_blue = new System.Windows.Forms.Button();
             this.b_black = new System.Windows.Forms.Button();
@@ -46,10 +50,6 @@
             this.num_size = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -87,14 +87,14 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.pictureBox1);
-            this.splitContainer1.Size = new System.Drawing.Size(800, 450);
-            this.splitContainer1.SplitterDistance = 188;
+            this.splitContainer1.Size = new System.Drawing.Size(918, 508);
+            this.splitContainer1.SplitterDistance = 250;
             this.splitContainer1.TabIndex = 0;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(60, 347);
+            this.label3.Location = new System.Drawing.Point(89, 378);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(63, 13);
             this.label3.TabIndex = 17;
@@ -103,7 +103,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(79, 273);
+            this.label2.Location = new System.Drawing.Point(105, 310);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(27, 13);
             this.label2.TabIndex = 16;
@@ -121,43 +121,79 @@
             this.box_cells.Controls.Add(this.b_red);
             this.box_cells.Location = new System.Drawing.Point(3, 67);
             this.box_cells.Name = "box_cells";
-            this.box_cells.Size = new System.Drawing.Size(180, 203);
+            this.box_cells.Size = new System.Drawing.Size(242, 227);
             this.box_cells.TabIndex = 15;
             this.box_cells.TabStop = false;
             this.box_cells.Text = "Клетки";
+            // 
+            // label7
+            // 
+            this.label7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label7.Location = new System.Drawing.Point(59, 172);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(182, 45);
+            this.label7.TabIndex = 17;
+            this.label7.Text = "Эволюционированная клтека. Агрессивна абсолютно ко всем. Попарное размножение.\r\n";
+            // 
+            // label6
+            // 
+            this.label6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label6.Location = new System.Drawing.Point(59, 121);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(182, 45);
+            this.label6.TabIndex = 16;
+            this.label6.Text = "Эволюционированная клетка. Агрессивна к другим видам. Попарное размножение.";
+            // 
+            // label5
+            // 
+            this.label5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label5.Location = new System.Drawing.Point(59, 70);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(177, 45);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "Эволюционированная клетка. Может постоять за себя. Попарное размножение.\r\n";
+            // 
+            // label4
+            // 
+            this.label4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label4.Location = new System.Drawing.Point(59, 19);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(177, 45);
+            this.label4.TabIndex = 14;
+            this.label4.Text = "Естественная клетка. Не агрессивна. Размножение случайно.";
             // 
             // b_green
             // 
             this.b_green.Location = new System.Drawing.Point(8, 19);
             this.b_green.Name = "b_green";
-            this.b_green.Size = new System.Drawing.Size(40, 40);
+            this.b_green.Size = new System.Drawing.Size(45, 45);
             this.b_green.TabIndex = 10;
             this.b_green.Text = "g";
             this.b_green.UseVisualStyleBackColor = true;
             // 
             // b_blue
             // 
-            this.b_blue.Location = new System.Drawing.Point(8, 65);
+            this.b_blue.Location = new System.Drawing.Point(8, 70);
             this.b_blue.Name = "b_blue";
-            this.b_blue.Size = new System.Drawing.Size(40, 40);
+            this.b_blue.Size = new System.Drawing.Size(45, 45);
             this.b_blue.TabIndex = 11;
             this.b_blue.Text = "b";
             this.b_blue.UseVisualStyleBackColor = true;
             // 
             // b_black
             // 
-            this.b_black.Location = new System.Drawing.Point(8, 157);
+            this.b_black.Location = new System.Drawing.Point(8, 172);
             this.b_black.Name = "b_black";
-            this.b_black.Size = new System.Drawing.Size(40, 40);
+            this.b_black.Size = new System.Drawing.Size(45, 45);
             this.b_black.TabIndex = 13;
             this.b_black.Text = "black";
             this.b_black.UseVisualStyleBackColor = true;
             // 
             // b_red
             // 
-            this.b_red.Location = new System.Drawing.Point(8, 111);
+            this.b_red.Location = new System.Drawing.Point(8, 121);
             this.b_red.Name = "b_red";
-            this.b_red.Size = new System.Drawing.Size(40, 40);
+            this.b_red.Size = new System.Drawing.Size(45, 45);
             this.b_red.TabIndex = 12;
             this.b_red.Text = "r";
             this.b_red.UseVisualStyleBackColor = true;
@@ -173,16 +209,16 @@
             // 
             // b_now
             // 
-            this.b_now.Location = new System.Drawing.Point(69, 302);
+            this.b_now.Location = new System.Drawing.Point(92, 337);
             this.b_now.Name = "b_now";
-            this.b_now.Size = new System.Drawing.Size(48, 23);
+            this.b_now.Size = new System.Drawing.Size(60, 23);
             this.b_now.TabIndex = 9;
             this.b_now.Text = "с";
             this.b_now.UseVisualStyleBackColor = true;
             // 
             // bar_speed
             // 
-            this.bar_speed.Location = new System.Drawing.Point(3, 363);
+            this.bar_speed.Location = new System.Drawing.Point(31, 394);
             this.bar_speed.Minimum = 1;
             this.bar_speed.Name = "bar_speed";
             this.bar_speed.Size = new System.Drawing.Size(180, 45);
@@ -191,25 +227,25 @@
             // 
             // b_stepBack
             // 
-            this.b_stepBack.Location = new System.Drawing.Point(3, 302);
+            this.b_stepBack.Location = new System.Drawing.Point(3, 337);
             this.b_stepBack.Name = "b_stepBack";
-            this.b_stepBack.Size = new System.Drawing.Size(60, 23);
+            this.b_stepBack.Size = new System.Drawing.Size(83, 23);
             this.b_stepBack.TabIndex = 7;
             this.b_stepBack.Text = "н";
             this.b_stepBack.UseVisualStyleBackColor = true;
             // 
             // b_stepForward
             // 
-            this.b_stepForward.Location = new System.Drawing.Point(123, 302);
+            this.b_stepForward.Location = new System.Drawing.Point(158, 337);
             this.b_stepForward.Name = "b_stepForward";
-            this.b_stepForward.Size = new System.Drawing.Size(60, 23);
+            this.b_stepForward.Size = new System.Drawing.Size(87, 23);
             this.b_stepForward.TabIndex = 5;
             this.b_stepForward.Text = "в";
             this.b_stepForward.UseVisualStyleBackColor = true;
             // 
             // b_stop
             // 
-            this.b_stop.Location = new System.Drawing.Point(108, 414);
+            this.b_stop.Location = new System.Drawing.Point(164, 472);
             this.b_stop.Name = "b_stop";
             this.b_stop.Size = new System.Drawing.Size(75, 23);
             this.b_stop.TabIndex = 3;
@@ -218,7 +254,7 @@
             // 
             // b_start
             // 
-            this.b_start.Location = new System.Drawing.Point(3, 414);
+            this.b_start.Location = new System.Drawing.Point(11, 472);
             this.b_start.Name = "b_start";
             this.b_start.Size = new System.Drawing.Size(75, 23);
             this.b_start.TabIndex = 2;
@@ -261,51 +297,15 @@
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(606, 448);
+            this.pictureBox1.Size = new System.Drawing.Size(662, 506);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            // 
-            // label4
-            // 
-            this.label4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label4.Location = new System.Drawing.Point(54, 19);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(126, 40);
-            this.label4.TabIndex = 14;
-            this.label4.Text = "Естественная клетка. Не агрессивна. ";
-            // 
-            // label5
-            // 
-            this.label5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label5.Location = new System.Drawing.Point(54, 65);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(126, 40);
-            this.label5.TabIndex = 15;
-            this.label5.Text = "Может постоять за себя.";
-            // 
-            // label6
-            // 
-            this.label6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label6.Location = new System.Drawing.Point(54, 111);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(126, 40);
-            this.label6.TabIndex = 16;
-            this.label6.Text = "Агрессивна к другим видам";
-            // 
-            // label7
-            // 
-            this.label7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label7.Location = new System.Drawing.Point(54, 157);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(126, 40);
-            this.label7.TabIndex = 17;
-            this.label7.Text = "Агрессивна абсолютно ко всем.";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(918, 508);
             this.Controls.Add(this.splitContainer1);
             this.Name = "Form1";
             this.Text = "Form1";
