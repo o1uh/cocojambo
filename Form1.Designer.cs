@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -49,7 +50,9 @@
             this.b_start = new System.Windows.Forms.Button();
             this.num_size = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox = new System.Windows.Forms.PictureBox();
+            this.timer = new System.Windows.Forms.Timer(this.components);
+            this.b_clear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -57,7 +60,7 @@
             this.box_cells.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bar_speed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_size)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -71,6 +74,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.b_clear);
             this.splitContainer1.Panel1.Controls.Add(this.label3);
             this.splitContainer1.Panel1.Controls.Add(this.label2);
             this.splitContainer1.Panel1.Controls.Add(this.box_cells);
@@ -86,15 +90,15 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.pictureBox1);
-            this.splitContainer1.Size = new System.Drawing.Size(918, 508);
-            this.splitContainer1.SplitterDistance = 250;
+            this.splitContainer1.Panel2.Controls.Add(this.pictureBox);
+            this.splitContainer1.Size = new System.Drawing.Size(906, 602);
+            this.splitContainer1.SplitterDistance = 300;
             this.splitContainer1.TabIndex = 0;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(89, 378);
+            this.label3.Location = new System.Drawing.Point(116, 386);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(63, 13);
             this.label3.TabIndex = 17;
@@ -103,7 +107,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(105, 310);
+            this.label2.Location = new System.Drawing.Point(125, 307);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(27, 13);
             this.label2.TabIndex = 16;
@@ -121,7 +125,7 @@
             this.box_cells.Controls.Add(this.b_red);
             this.box_cells.Location = new System.Drawing.Point(3, 67);
             this.box_cells.Name = "box_cells";
-            this.box_cells.Size = new System.Drawing.Size(242, 227);
+            this.box_cells.Size = new System.Drawing.Size(292, 227);
             this.box_cells.TabIndex = 15;
             this.box_cells.TabStop = false;
             this.box_cells.Text = "Клетки";
@@ -131,7 +135,7 @@
             this.label7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label7.Location = new System.Drawing.Point(59, 172);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(182, 45);
+            this.label7.Size = new System.Drawing.Size(227, 45);
             this.label7.TabIndex = 17;
             this.label7.Text = "Эволюционированная клтека. Агрессивна абсолютно ко всем. Попарное размножение.\r\n";
             // 
@@ -140,7 +144,7 @@
             this.label6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label6.Location = new System.Drawing.Point(59, 121);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(182, 45);
+            this.label6.Size = new System.Drawing.Size(227, 45);
             this.label6.TabIndex = 16;
             this.label6.Text = "Эволюционированная клетка. Агрессивна к другим видам. Попарное размножение.";
             // 
@@ -149,7 +153,7 @@
             this.label5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label5.Location = new System.Drawing.Point(59, 70);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(177, 45);
+            this.label5.Size = new System.Drawing.Size(227, 45);
             this.label5.TabIndex = 15;
             this.label5.Text = "Эволюционированная клетка. Может постоять за себя. Попарное размножение.\r\n";
             // 
@@ -158,7 +162,7 @@
             this.label4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label4.Location = new System.Drawing.Point(59, 19);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(177, 45);
+            this.label4.Size = new System.Drawing.Size(227, 45);
             this.label4.TabIndex = 14;
             this.label4.Text = "Естественная клетка. Не агрессивна. Размножение случайно.";
             // 
@@ -200,7 +204,7 @@
             // 
             // b_size
             // 
-            this.b_size.Location = new System.Drawing.Point(108, 32);
+            this.b_size.Location = new System.Drawing.Point(164, 3);
             this.b_size.Name = "b_size";
             this.b_size.Size = new System.Drawing.Size(75, 23);
             this.b_size.TabIndex = 14;
@@ -209,19 +213,19 @@
             // 
             // b_now
             // 
-            this.b_now.Location = new System.Drawing.Point(92, 337);
+            this.b_now.Location = new System.Drawing.Point(109, 337);
             this.b_now.Name = "b_now";
-            this.b_now.Size = new System.Drawing.Size(60, 23);
+            this.b_now.Size = new System.Drawing.Size(80, 23);
             this.b_now.TabIndex = 9;
             this.b_now.Text = "с";
             this.b_now.UseVisualStyleBackColor = true;
             // 
             // bar_speed
             // 
-            this.bar_speed.Location = new System.Drawing.Point(31, 394);
+            this.bar_speed.Location = new System.Drawing.Point(3, 411);
             this.bar_speed.Minimum = 1;
             this.bar_speed.Name = "bar_speed";
-            this.bar_speed.Size = new System.Drawing.Size(180, 45);
+            this.bar_speed.Size = new System.Drawing.Size(292, 45);
             this.bar_speed.TabIndex = 8;
             this.bar_speed.Value = 1;
             // 
@@ -229,41 +233,43 @@
             // 
             this.b_stepBack.Location = new System.Drawing.Point(3, 337);
             this.b_stepBack.Name = "b_stepBack";
-            this.b_stepBack.Size = new System.Drawing.Size(83, 23);
+            this.b_stepBack.Size = new System.Drawing.Size(100, 23);
             this.b_stepBack.TabIndex = 7;
             this.b_stepBack.Text = "н";
             this.b_stepBack.UseVisualStyleBackColor = true;
             // 
             // b_stepForward
             // 
-            this.b_stepForward.Location = new System.Drawing.Point(158, 337);
+            this.b_stepForward.Location = new System.Drawing.Point(195, 337);
             this.b_stepForward.Name = "b_stepForward";
-            this.b_stepForward.Size = new System.Drawing.Size(87, 23);
+            this.b_stepForward.Size = new System.Drawing.Size(100, 23);
             this.b_stepForward.TabIndex = 5;
             this.b_stepForward.Text = "в";
             this.b_stepForward.UseVisualStyleBackColor = true;
             // 
             // b_stop
             // 
-            this.b_stop.Location = new System.Drawing.Point(164, 472);
+            this.b_stop.Location = new System.Drawing.Point(164, 496);
             this.b_stop.Name = "b_stop";
             this.b_stop.Size = new System.Drawing.Size(75, 23);
             this.b_stop.TabIndex = 3;
             this.b_stop.Text = "СТОП";
             this.b_stop.UseVisualStyleBackColor = true;
+            this.b_stop.Click += new System.EventHandler(this.b_stop_Click);
             // 
             // b_start
             // 
-            this.b_start.Location = new System.Drawing.Point(11, 472);
+            this.b_start.Location = new System.Drawing.Point(62, 496);
             this.b_start.Name = "b_start";
             this.b_start.Size = new System.Drawing.Size(75, 23);
             this.b_start.TabIndex = 2;
             this.b_start.Text = "СТАРТ";
             this.b_start.UseVisualStyleBackColor = true;
+            this.b_start.Click += new System.EventHandler(this.b_start_Click);
             // 
             // num_size
             // 
-            this.num_size.Location = new System.Drawing.Point(15, 35);
+            this.num_size.Location = new System.Drawing.Point(82, 6);
             this.num_size.Maximum = new decimal(new int[] {
             200,
             0,
@@ -275,7 +281,7 @@
             0,
             0});
             this.num_size.Name = "num_size";
-            this.num_size.Size = new System.Drawing.Size(87, 20);
+            this.num_size.Size = new System.Drawing.Size(76, 20);
             this.num_size.TabIndex = 1;
             this.num_size.Value = new decimal(new int[] {
             10,
@@ -286,28 +292,44 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(55, 8);
+            this.label1.Location = new System.Drawing.Point(3, 8);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(73, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Размер поля";
             // 
-            // pictureBox1
+            // pictureBox
             // 
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(662, 506);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox.Name = "pictureBox";
+            this.pictureBox.Size = new System.Drawing.Size(600, 600);
+            this.pictureBox.TabIndex = 0;
+            this.pictureBox.TabStop = false;
+            // 
+            // timer
+            // 
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
+            // b_clear
+            // 
+            this.b_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.b_clear.Location = new System.Drawing.Point(62, 566);
+            this.b_clear.Name = "b_clear";
+            this.b_clear.Size = new System.Drawing.Size(177, 23);
+            this.b_clear.TabIndex = 18;
+            this.b_clear.Text = "ОЧИСТИТЬ ПОЛЕ";
+            this.b_clear.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(918, 508);
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(906, 602);
             this.Controls.Add(this.splitContainer1);
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
@@ -317,7 +339,7 @@
             this.box_cells.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bar_speed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_size)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -325,7 +347,7 @@
         #endregion
 
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown num_size;
         private System.Windows.Forms.Button b_stepBack;
@@ -338,7 +360,6 @@
         private System.Windows.Forms.Button b_red;
         private System.Windows.Forms.Button b_blue;
         private System.Windows.Forms.Button b_green;
-        private System.Windows.Forms.Button b_size;
         private System.Windows.Forms.GroupBox box_cells;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -346,6 +367,9 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.Button b_size;
+        private System.Windows.Forms.Button b_clear;
     }
 }
 
