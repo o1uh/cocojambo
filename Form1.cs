@@ -25,7 +25,7 @@ namespace cocojambo {
             game_stop();
         }
         private void timer_Tick(object sender, EventArgs e) {
-            field_generation();
+            field_update();
         }
         private void field_create() { 
             
@@ -40,12 +40,7 @@ namespace cocojambo {
             pictureBox.Image = new Bitmap(field_hw, field_hw);
             graphics = Graphics.FromImage(pictureBox.Image);
 
-            graphics.Clear(Color.Black);
-            var field = game.get_field();
-            for (int i = 0; i < field_size; i++)
-                for (int j = 0; j < field_size; j++)
-                    graphics.FillRectangle(field[i,j].get_brush(), i * cells_size + indent, j * cells_size + indent, cells_size - 1, cells_size-1);
-            pictureBox.Refresh();
+            field_update();
         }
         private void game_start() {
             bar_size.Enabled = false;
@@ -60,10 +55,15 @@ namespace cocojambo {
             }
             return;
         }
-        private void field_generation() { 
-            
-        }
         
+        private void field_update() { 
+            graphics.Clear(Color.Black);
+            var field = game.get_field();
+            for (int i = 0; i < field_size; i++)
+                for (int j = 0; j < field_size; j++)
+                    graphics.FillRectangle(field[i, j].get_brush(), i * cells_size + indent, j * cells_size + indent, cells_size - 1, cells_size - 1);
+            pictureBox.Refresh();
+        }
         public Form1() {
             InitializeComponent();
             field_create();
@@ -76,5 +76,23 @@ namespace cocojambo {
         private void b_clear_Click(object sender, EventArgs e){
             field_create();
         }
+
+        private void pictureBox_MouseMove(object sender, MouseEventArgs e) {
+            if (timer.Enabled) return;
+
+            if (e.Button == MouseButtons.Left && e.Y < field_hw && e.X < field_hw) { 
+                int i = (e.X - indent) / cells_size;
+                int j = (e.Y - indent) / cells_size;
+                game.add_cell(i, j, 1);
+                field_update();
+            }
+            if (e.Button == MouseButtons.Right && e.Y < field_hw && e.X < field_hw) {
+                int i = (e.X - indent) / cells_size;
+                int j = (e.Y - indent) / cells_size;
+                game.delete_cell(i, j);
+                field_update();
+            }
+        }
+        
     }   
 }

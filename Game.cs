@@ -23,5 +23,16 @@ namespace cocojambo {
                     field_copy[i,j] = field[i, j];
             return field_copy; 
         }
+        public void add_cell(int i, int j, int type) {
+            if (validate_pos(i,j))
+                field[i,j] = new Cell(type);
+        }
+        public void delete_cell(int i, int j) {
+            if (validate_pos(i, j))
+                field[i, j] = new Cell();
+        }
+        private bool validate_pos(int i, int j) { 
+            return i >= 0 && j >= 0 && i<=field_size && j<=field_size;
+        }
     }
 }

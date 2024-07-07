@@ -115,6 +115,7 @@ namespace cocojambo {
         public Brush get_brush() {
             return brush;
         }
+       
     }
     
 }
