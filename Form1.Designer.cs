@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.bar_size = new System.Windows.Forms.TrackBar();
+            this.b_clear = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.box_cells = new System.Windows.Forms.GroupBox();
@@ -41,25 +43,22 @@
             this.b_blue = new System.Windows.Forms.Button();
             this.b_black = new System.Windows.Forms.Button();
             this.b_red = new System.Windows.Forms.Button();
-            this.b_size = new System.Windows.Forms.Button();
             this.b_now = new System.Windows.Forms.Button();
             this.bar_speed = new System.Windows.Forms.TrackBar();
             this.b_stepBack = new System.Windows.Forms.Button();
             this.b_stepForward = new System.Windows.Forms.Button();
             this.b_stop = new System.Windows.Forms.Button();
             this.b_start = new System.Windows.Forms.Button();
-            this.num_size = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.timer = new System.Windows.Forms.Timer(this.components);
-            this.b_clear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bar_size)).BeginInit();
             this.box_cells.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bar_speed)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.num_size)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -74,18 +73,17 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.bar_size);
             this.splitContainer1.Panel1.Controls.Add(this.b_clear);
             this.splitContainer1.Panel1.Controls.Add(this.label3);
             this.splitContainer1.Panel1.Controls.Add(this.label2);
             this.splitContainer1.Panel1.Controls.Add(this.box_cells);
-            this.splitContainer1.Panel1.Controls.Add(this.b_size);
             this.splitContainer1.Panel1.Controls.Add(this.b_now);
             this.splitContainer1.Panel1.Controls.Add(this.bar_speed);
             this.splitContainer1.Panel1.Controls.Add(this.b_stepBack);
             this.splitContainer1.Panel1.Controls.Add(this.b_stepForward);
             this.splitContainer1.Panel1.Controls.Add(this.b_stop);
             this.splitContainer1.Panel1.Controls.Add(this.b_start);
-            this.splitContainer1.Panel1.Controls.Add(this.num_size);
             this.splitContainer1.Panel1.Controls.Add(this.label1);
             // 
             // splitContainer1.Panel2
@@ -95,10 +93,33 @@
             this.splitContainer1.SplitterDistance = 300;
             this.splitContainer1.TabIndex = 0;
             // 
+            // bar_size
+            // 
+            this.bar_size.LargeChange = 1;
+            this.bar_size.Location = new System.Drawing.Point(3, 37);
+            this.bar_size.Maximum = 5;
+            this.bar_size.Minimum = 1;
+            this.bar_size.Name = "bar_size";
+            this.bar_size.Size = new System.Drawing.Size(292, 45);
+            this.bar_size.TabIndex = 19;
+            this.bar_size.Value = 1;
+            this.bar_size.Scroll += new System.EventHandler(this.bar_size_Scroll);
+            // 
+            // b_clear
+            // 
+            this.b_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.b_clear.Location = new System.Drawing.Point(62, 566);
+            this.b_clear.Name = "b_clear";
+            this.b_clear.Size = new System.Drawing.Size(177, 23);
+            this.b_clear.TabIndex = 18;
+            this.b_clear.Text = "ОЧИСТИТЬ ПОЛЕ";
+            this.b_clear.UseVisualStyleBackColor = true;
+            this.b_clear.Click += new System.EventHandler(this.b_clear_Click);
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(116, 386);
+            this.label3.Location = new System.Drawing.Point(116, 421);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(63, 13);
             this.label3.TabIndex = 17;
@@ -107,7 +128,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(125, 307);
+            this.label2.Location = new System.Drawing.Point(131, 344);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(27, 13);
             this.label2.TabIndex = 16;
@@ -123,7 +144,7 @@
             this.box_cells.Controls.Add(this.b_blue);
             this.box_cells.Controls.Add(this.b_black);
             this.box_cells.Controls.Add(this.b_red);
-            this.box_cells.Location = new System.Drawing.Point(3, 67);
+            this.box_cells.Location = new System.Drawing.Point(3, 102);
             this.box_cells.Name = "box_cells";
             this.box_cells.Size = new System.Drawing.Size(292, 227);
             this.box_cells.TabIndex = 15;
@@ -202,18 +223,9 @@
             this.b_red.Text = "r";
             this.b_red.UseVisualStyleBackColor = true;
             // 
-            // b_size
-            // 
-            this.b_size.Location = new System.Drawing.Point(164, 3);
-            this.b_size.Name = "b_size";
-            this.b_size.Size = new System.Drawing.Size(75, 23);
-            this.b_size.TabIndex = 14;
-            this.b_size.Text = "Применить";
-            this.b_size.UseVisualStyleBackColor = true;
-            // 
             // b_now
             // 
-            this.b_now.Location = new System.Drawing.Point(109, 337);
+            this.b_now.Location = new System.Drawing.Point(109, 379);
             this.b_now.Name = "b_now";
             this.b_now.Size = new System.Drawing.Size(80, 23);
             this.b_now.TabIndex = 9;
@@ -222,7 +234,8 @@
             // 
             // bar_speed
             // 
-            this.bar_speed.Location = new System.Drawing.Point(3, 411);
+            this.bar_speed.LargeChange = 1;
+            this.bar_speed.Location = new System.Drawing.Point(-1, 454);
             this.bar_speed.Minimum = 1;
             this.bar_speed.Name = "bar_speed";
             this.bar_speed.Size = new System.Drawing.Size(292, 45);
@@ -231,7 +244,7 @@
             // 
             // b_stepBack
             // 
-            this.b_stepBack.Location = new System.Drawing.Point(3, 337);
+            this.b_stepBack.Location = new System.Drawing.Point(3, 379);
             this.b_stepBack.Name = "b_stepBack";
             this.b_stepBack.Size = new System.Drawing.Size(100, 23);
             this.b_stepBack.TabIndex = 7;
@@ -240,7 +253,7 @@
             // 
             // b_stepForward
             // 
-            this.b_stepForward.Location = new System.Drawing.Point(195, 337);
+            this.b_stepForward.Location = new System.Drawing.Point(195, 379);
             this.b_stepForward.Name = "b_stepForward";
             this.b_stepForward.Size = new System.Drawing.Size(100, 23);
             this.b_stepForward.TabIndex = 5;
@@ -249,7 +262,7 @@
             // 
             // b_stop
             // 
-            this.b_stop.Location = new System.Drawing.Point(164, 496);
+            this.b_stop.Location = new System.Drawing.Point(164, 524);
             this.b_stop.Name = "b_stop";
             this.b_stop.Size = new System.Drawing.Size(75, 23);
             this.b_stop.TabIndex = 3;
@@ -259,7 +272,7 @@
             // 
             // b_start
             // 
-            this.b_start.Location = new System.Drawing.Point(62, 496);
+            this.b_start.Location = new System.Drawing.Point(62, 524);
             this.b_start.Name = "b_start";
             this.b_start.Size = new System.Drawing.Size(75, 23);
             this.b_start.TabIndex = 2;
@@ -267,32 +280,10 @@
             this.b_start.UseVisualStyleBackColor = true;
             this.b_start.Click += new System.EventHandler(this.b_start_Click);
             // 
-            // num_size
-            // 
-            this.num_size.Location = new System.Drawing.Point(82, 6);
-            this.num_size.Maximum = new decimal(new int[] {
-            200,
-            0,
-            0,
-            0});
-            this.num_size.Minimum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.num_size.Name = "num_size";
-            this.num_size.Size = new System.Drawing.Size(76, 20);
-            this.num_size.TabIndex = 1;
-            this.num_size.Value = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 8);
+            this.label1.Location = new System.Drawing.Point(106, 8);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(73, 13);
             this.label1.TabIndex = 0;
@@ -311,16 +302,6 @@
             // 
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
-            // b_clear
-            // 
-            this.b_clear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.b_clear.Location = new System.Drawing.Point(62, 566);
-            this.b_clear.Name = "b_clear";
-            this.b_clear.Size = new System.Drawing.Size(177, 23);
-            this.b_clear.TabIndex = 18;
-            this.b_clear.Text = "ОЧИСТИТЬ ПОЛЕ";
-            this.b_clear.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -336,9 +317,9 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.bar_size)).EndInit();
             this.box_cells.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bar_speed)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.num_size)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
 
@@ -349,7 +330,6 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.NumericUpDown num_size;
         private System.Windows.Forms.Button b_stepBack;
         private System.Windows.Forms.Button b_stepForward;
         private System.Windows.Forms.Button b_stop;
@@ -368,8 +348,8 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Timer timer;
-        private System.Windows.Forms.Button b_size;
         private System.Windows.Forms.Button b_clear;
+        private System.Windows.Forms.TrackBar bar_size;
     }
 }
 
