@@ -45,8 +45,8 @@
             this.b_red = new System.Windows.Forms.Button();
             this.b_now = new System.Windows.Forms.Button();
             this.bar_speed = new System.Windows.Forms.TrackBar();
-            this.b_stepBack = new System.Windows.Forms.Button();
-            this.b_stepForward = new System.Windows.Forms.Button();
+            this.b_back = new System.Windows.Forms.Button();
+            this.b_next = new System.Windows.Forms.Button();
             this.b_stop = new System.Windows.Forms.Button();
             this.b_start = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -80,8 +80,8 @@
             this.splitContainer1.Panel1.Controls.Add(this.box_cells);
             this.splitContainer1.Panel1.Controls.Add(this.b_now);
             this.splitContainer1.Panel1.Controls.Add(this.bar_speed);
-            this.splitContainer1.Panel1.Controls.Add(this.b_stepBack);
-            this.splitContainer1.Panel1.Controls.Add(this.b_stepForward);
+            this.splitContainer1.Panel1.Controls.Add(this.b_back);
+            this.splitContainer1.Panel1.Controls.Add(this.b_next);
             this.splitContainer1.Panel1.Controls.Add(this.b_stop);
             this.splitContainer1.Panel1.Controls.Add(this.b_start);
             this.splitContainer1.Panel1.Controls.Add(this.label1);
@@ -189,39 +189,47 @@
             // 
             // b_green
             // 
+            this.b_green.BackColor = System.Drawing.Color.Green;
             this.b_green.Location = new System.Drawing.Point(8, 19);
             this.b_green.Name = "b_green";
             this.b_green.Size = new System.Drawing.Size(45, 45);
             this.b_green.TabIndex = 10;
-            this.b_green.Text = "g";
-            this.b_green.UseVisualStyleBackColor = true;
+            this.b_green.UseVisualStyleBackColor = false;
+            this.b_green.Click += new System.EventHandler(this.b_green_Click);
+            this.b_green.Leave += new System.EventHandler(this.b_green_Leave);
             // 
             // b_blue
             // 
+            this.b_blue.BackColor = System.Drawing.Color.Blue;
             this.b_blue.Location = new System.Drawing.Point(8, 70);
             this.b_blue.Name = "b_blue";
             this.b_blue.Size = new System.Drawing.Size(45, 45);
             this.b_blue.TabIndex = 11;
-            this.b_blue.Text = "b";
-            this.b_blue.UseVisualStyleBackColor = true;
+            this.b_blue.UseVisualStyleBackColor = false;
+            this.b_blue.Click += new System.EventHandler(this.b_blue_Click);
+            this.b_blue.Leave += new System.EventHandler(this.b_blue_Leave);
             // 
             // b_black
             // 
+            this.b_black.BackColor = System.Drawing.Color.Gray;
             this.b_black.Location = new System.Drawing.Point(8, 172);
             this.b_black.Name = "b_black";
             this.b_black.Size = new System.Drawing.Size(45, 45);
             this.b_black.TabIndex = 13;
-            this.b_black.Text = "black";
-            this.b_black.UseVisualStyleBackColor = true;
+            this.b_black.UseVisualStyleBackColor = false;
+            this.b_black.Click += new System.EventHandler(this.b_black_Click);
+            this.b_black.Leave += new System.EventHandler(this.b_black_Leave);
             // 
             // b_red
             // 
+            this.b_red.BackColor = System.Drawing.Color.Red;
             this.b_red.Location = new System.Drawing.Point(8, 121);
             this.b_red.Name = "b_red";
             this.b_red.Size = new System.Drawing.Size(45, 45);
             this.b_red.TabIndex = 12;
-            this.b_red.Text = "r";
-            this.b_red.UseVisualStyleBackColor = true;
+            this.b_red.UseVisualStyleBackColor = false;
+            this.b_red.Click += new System.EventHandler(this.b_red_Click);
+            this.b_red.Leave += new System.EventHandler(this.b_red_Leave);
             // 
             // b_now
             // 
@@ -241,24 +249,25 @@
             this.bar_speed.Size = new System.Drawing.Size(292, 45);
             this.bar_speed.TabIndex = 8;
             this.bar_speed.Value = 1;
+            this.bar_speed.Scroll += new System.EventHandler(this.bar_speed_Scroll);
             // 
-            // b_stepBack
+            // b_back
             // 
-            this.b_stepBack.Location = new System.Drawing.Point(3, 379);
-            this.b_stepBack.Name = "b_stepBack";
-            this.b_stepBack.Size = new System.Drawing.Size(100, 23);
-            this.b_stepBack.TabIndex = 7;
-            this.b_stepBack.Text = "н";
-            this.b_stepBack.UseVisualStyleBackColor = true;
+            this.b_back.Location = new System.Drawing.Point(3, 379);
+            this.b_back.Name = "b_back";
+            this.b_back.Size = new System.Drawing.Size(100, 23);
+            this.b_back.TabIndex = 7;
+            this.b_back.Text = "н";
+            this.b_back.UseVisualStyleBackColor = true;
             // 
-            // b_stepForward
+            // b_next
             // 
-            this.b_stepForward.Location = new System.Drawing.Point(195, 379);
-            this.b_stepForward.Name = "b_stepForward";
-            this.b_stepForward.Size = new System.Drawing.Size(100, 23);
-            this.b_stepForward.TabIndex = 5;
-            this.b_stepForward.Text = "в";
-            this.b_stepForward.UseVisualStyleBackColor = true;
+            this.b_next.Location = new System.Drawing.Point(195, 379);
+            this.b_next.Name = "b_next";
+            this.b_next.Size = new System.Drawing.Size(100, 23);
+            this.b_next.TabIndex = 5;
+            this.b_next.Text = "в";
+            this.b_next.UseVisualStyleBackColor = true;
             // 
             // b_stop
             // 
@@ -297,6 +306,7 @@
             this.pictureBox.Size = new System.Drawing.Size(600, 600);
             this.pictureBox.TabIndex = 0;
             this.pictureBox.TabStop = false;
+            this.pictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseDown);
             this.pictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseMove);
             // 
             // timer
@@ -331,8 +341,8 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button b_stepBack;
-        private System.Windows.Forms.Button b_stepForward;
+        private System.Windows.Forms.Button b_back;
+        private System.Windows.Forms.Button b_next;
         private System.Windows.Forms.Button b_stop;
         private System.Windows.Forms.Button b_start;
         private System.Windows.Forms.TrackBar bar_speed;

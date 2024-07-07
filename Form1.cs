@@ -17,6 +17,8 @@ namespace cocojambo {
         private int field_hw;
         private int cells_size;
         private int indent;
+        private int cell_type;
+        private int speed;
 
         private void b_start_Click(object sender, EventArgs e) {
             game_start();
@@ -27,8 +29,8 @@ namespace cocojambo {
         private void timer_Tick(object sender, EventArgs e) {
             field_update();
         }
-        private void field_create() { 
-            
+        private void field_create() {
+            cell_type = 0;
             field_size = (int)bar_size.Value * 10;
             field_hw = pictureBox.Height;
 
@@ -36,6 +38,7 @@ namespace cocojambo {
             indent = (field_hw - cells_size * field_size) / 2;
 
             game = new Game(field_size);
+            speed = timer.Interval;
 
             pictureBox.Image = new Bitmap(field_hw, field_hw);
             graphics = Graphics.FromImage(pictureBox.Image);
@@ -43,13 +46,33 @@ namespace cocojambo {
             field_update();
         }
         private void game_start() {
+            b_green.Enabled = false;
+            b_blue.Enabled = false;
+            b_red.Enabled = false;
+            b_black.Enabled = false;
+
+            b_next.Enabled = false;
+            b_now.Enabled = false;  
+            b_back.Enabled = false;
+
             bar_size.Enabled = false;
             b_start.Enabled = false;
+
             timer.Start();
         }
         private void game_stop() {
             if (timer.Enabled) {
                 timer.Stop();
+
+                b_green.Enabled = true;
+                b_blue.Enabled = true;
+                b_red.Enabled = true;
+                b_black.Enabled = true;
+
+                b_next.Enabled = true;
+                b_now.Enabled = true;
+                b_back.Enabled = true;
+
                 bar_size.Enabled = true;
                 b_start.Enabled = true;
             }
@@ -74,16 +97,14 @@ namespace cocojambo {
         }
 
         private void b_clear_Click(object sender, EventArgs e){
+            game_stop();
             field_create();
         }
-
-        private void pictureBox_MouseMove(object sender, MouseEventArgs e) {
-            if (timer.Enabled) return;
-
-            if (e.Button == MouseButtons.Left && e.Y < field_hw && e.X < field_hw) { 
+        private void update_cell(object sender, MouseEventArgs e) { 
+            if (e.Button == MouseButtons.Left && e.Y < field_hw && e.X < field_hw && cell_type > 0) { 
                 int i = (e.X - indent) / cells_size;
                 int j = (e.Y - indent) / cells_size;
-                game.add_cell(i, j, 1);
+                game.add_cell(i, j, cell_type);
                 field_update();
             }
             if (e.Button == MouseButtons.Right && e.Y < field_hw && e.X < field_hw) {
@@ -93,6 +114,51 @@ namespace cocojambo {
                 field_update();
             }
         }
-        
+        private void pictureBox_MouseMove(object sender, MouseEventArgs e) {
+            if (timer.Enabled) return;
+            update_cell(sender, e);
+        }
+        private void pictureBox_MouseDown(object sender, MouseEventArgs e) {
+            if (timer.Enabled) return;
+            update_cell(sender, e);
+        }
+        private void remove_cell_type(){
+            cell_type = 0;
+        }
+        private void b_green_Click(object sender, EventArgs e){
+            cell_type = 1;
+        }
+
+        private void b_blue_Click(object sender, EventArgs e){
+            cell_type = 2;
+        }
+
+        private void b_red_Click(object sender, EventArgs e){
+            cell_type = 3;
+        }
+
+        private void b_black_Click(object sender, EventArgs e){
+            cell_type = 4;
+        }
+
+        private void b_green_Leave(object sender, EventArgs e) {
+            remove_cell_type();
+        }
+
+        private void b_blue_Leave(object sender, EventArgs e) {
+            remove_cell_type();
+        }
+
+        private void b_red_Leave(object sender, EventArgs e) {
+            remove_cell_type();
+        }
+
+        private void b_black_Leave(object sender, EventArgs e) {
+            remove_cell_type();
+        }
+
+        private void bar_speed_Scroll(object sender, EventArgs e) {
+            timer.Interval = speed * bar_speed.Value;
+        }
     }   
 }

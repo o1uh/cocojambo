@@ -85,7 +85,7 @@ namespace cocojambo {
                         break;
                 }
                 case 4: {
-                        brush = Brushes.Black;
+                        brush = Brushes.Gray;
 
                         reproduction = 1;
                         age = 0;
