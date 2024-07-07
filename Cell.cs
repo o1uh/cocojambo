@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace cocojambo {
     public class Cell {
         private int type;
-        private Color color;
+        private Brush brush;
       
         private int reproduction;
         private int age;
@@ -28,7 +28,7 @@ namespace cocojambo {
             switch (type)
             {
                 case 1: {
-                        color = Color.Green;
+                        brush = Brushes.Green;
 
                         reproduction = 0;
                         age = 0;
@@ -47,7 +47,7 @@ namespace cocojambo {
                         break; 
                 }
                 case 2: {
-                        color = Color.Blue;
+                        brush = Brushes.Blue;
 
                         reproduction = 1;
                         age = 0;
@@ -66,7 +66,7 @@ namespace cocojambo {
                         break;
                 }
                 case 3: {
-                        color = Color.Red;
+                        brush = Brushes.Red;
 
                         reproduction = 1;
                         age = 0;
@@ -85,7 +85,7 @@ namespace cocojambo {
                         break;
                 }
                 case 4: {
-                        color = Color.Black;
+                        brush = Brushes.Black;
 
                         reproduction = 1;
                         age = 0;
@@ -104,13 +104,16 @@ namespace cocojambo {
                         break;
                 }
                 default: {
-                        color = Color.White;
+                        brush = Brushes.White;
 
                         break;
                 }
                 
                 
             }
+        }
+        public Brush get_brush() {
+            return brush;
         }
     }
     

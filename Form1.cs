@@ -15,8 +15,8 @@ namespace cocojambo {
         private Game game;
         private int field_size;
         private int field_hw;
-        private float cells_size;
-        private float indent;
+        private int cells_size;
+        private int indent;
 
         private void b_start_Click(object sender, EventArgs e) {
             game_start();
@@ -44,7 +44,7 @@ namespace cocojambo {
             var field = game.get_field();
             for (int i = 0; i < field_size; i++)
                 for (int j = 0; j < field_size; j++)
-                        graphics.FillRectangle(Brushes.White, i * cells_size + indent, j * cells_size + indent, cells_size - 1, cells_size-1);
+                    graphics.FillRectangle(field[i,j].get_brush(), i * cells_size + indent, j * cells_size + indent, cells_size - 1, cells_size-1);
             pictureBox.Refresh();
         }
         private void game_start() {

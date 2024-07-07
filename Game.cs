@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace cocojambo {
     public class Game {
-        private int[,] field;
+        private Cell[,] field;
         private int field_size;
         public Game(int field_size) {
             this.field_size = field_size; 
-            field = new int[field_size, field_size];
+            field = new Cell[field_size, field_size];
             for (int i = 0; i < field_size; i++)
                 for (int j = 0; j < field_size; j++)
-                    field[i, j] = (i + j) % 2;
+                    field[i, j] = new Cell();
         }
         
-        public int[,] get_field() {
-            var field_copy = new int[field_size,field_size];
+        public Cell[,] get_field() {
+            var field_copy = new Cell[field_size,field_size];
             for (int i = 0; i < field_size; i++)
                 for (int j = 0; j < field_size; j++)
                     field_copy[i,j] = field[i, j];
