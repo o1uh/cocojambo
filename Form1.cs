@@ -27,6 +27,7 @@ namespace cocojambo {
             game_stop();
         }
         private void timer_Tick(object sender, EventArgs e) {
+            game.next_generation();
             field_update();
         }
         private void field_create() {
@@ -38,7 +39,7 @@ namespace cocojambo {
             indent = (field_hw - cells_size * field_size) / 2;
 
             game = new Game(field_size);
-            speed = timer.Interval;
+            
 
             pictureBox.Image = new Bitmap(field_hw, field_hw);
             graphics = Graphics.FromImage(pictureBox.Image);
@@ -84,12 +85,13 @@ namespace cocojambo {
             var field = game.get_field();
             for (int i = 0; i < field_size; i++)
                 for (int j = 0; j < field_size; j++)
-                    graphics.FillRectangle(field[i, j].get_brush(), i * cells_size + indent, j * cells_size + indent, cells_size - 1, cells_size - 1);
+                    graphics.FillRectangle(field[i, j].brush, i * cells_size + indent, j * cells_size + indent, cells_size - 1, cells_size - 1);
             pictureBox.Refresh();
         }
         public Form1() {
             InitializeComponent();
             field_create();
+            speed = timer.Interval;
         }
 
         private void bar_size_Scroll(object sender, EventArgs e) {
@@ -158,7 +160,7 @@ namespace cocojambo {
         }
 
         private void bar_speed_Scroll(object sender, EventArgs e) {
-            timer.Interval = speed * bar_speed.Value;
+            timer.Interval = speed / bar_speed.Value;
         }
     }   
 }

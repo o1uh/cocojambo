@@ -7,22 +7,23 @@ using System.Threading.Tasks;
 
 namespace cocojambo {
     public class Cell {
-        private int type;
-        private Brush brush;
-      
-        private int reproduction;
-        private int age;
-        private int age_death;
-        private int death_chance;
-        
-        private int view_radius;
-        private string agression;
-        private bool escape;
-        private bool hunt;
-        private int hunger;
-        private int hp_max;
-        private int hp;
-        private int atk;
+        public int type                 { get; private set; }
+        public Brush brush              { get; private set; }
+
+        public int reproduction         { get; private set; }
+        public int reproduction_chance  { get; private set; }
+        public int age;
+        public int age_death            { get; private set; }
+        public int death_chance;
+
+        public int view_radius          { get; private set; }
+        public string agression         { get; private set; }
+        public bool escape;
+        public bool hunt;
+        public int hunger;
+        public int hp_max               { get; private set; }
+        public int hp;
+        public int atk                  { get; private set; }
         public Cell(int type = 0) { 
             this.type = type;
             switch (type)
@@ -31,6 +32,7 @@ namespace cocojambo {
                         brush = Brushes.Green;
 
                         reproduction = 0;
+                        reproduction_chance = 30;
                         age = 0;
                         age_death = 1000000;
                         death_chance = 0;
@@ -50,6 +52,7 @@ namespace cocojambo {
                         brush = Brushes.Blue;
 
                         reproduction = 1;
+                        reproduction_chance = 80;
                         age = 0;
                         age_death = 100;
                         death_chance = 0;
@@ -69,6 +72,7 @@ namespace cocojambo {
                         brush = Brushes.Red;
 
                         reproduction = 1;
+                        reproduction_chance = 40;
                         age = 0;
                         age_death = 50;
                         death_chance = 0;
@@ -88,6 +92,7 @@ namespace cocojambo {
                         brush = Brushes.Gray;
 
                         reproduction = 1;
+                        reproduction_chance = 60;
                         age = 0;
                         age_death = 70;
                         death_chance = 0;
@@ -105,17 +110,14 @@ namespace cocojambo {
                 }
                 default: {
                         brush = Brushes.White;
-
+                        reproduction_chance = 1;
                         break;
                 }
-                
-                
             }
         }
-        public Brush get_brush() {
-            return brush;
-        }
-       
+        public static Cell operator ++(Cell cell) { cell.age++; return cell; }
+
+        
     }
     
 }

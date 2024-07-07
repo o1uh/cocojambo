@@ -243,7 +243,7 @@
             // bar_speed
             // 
             this.bar_speed.LargeChange = 1;
-            this.bar_speed.Location = new System.Drawing.Point(-1, 454);
+            this.bar_speed.Location = new System.Drawing.Point(3, 454);
             this.bar_speed.Minimum = 1;
             this.bar_speed.Name = "bar_speed";
             this.bar_speed.Size = new System.Drawing.Size(292, 45);
@@ -311,6 +311,7 @@
             // 
             // timer
             // 
+            this.timer.Interval = 500;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // Form1
