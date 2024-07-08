@@ -117,11 +117,11 @@ namespace cocojambo {
             }
         }
         private void pictureBox_MouseMove(object sender, MouseEventArgs e) {
-            if (timer.Enabled) return;
+            if (timer.Enabled || step_back != 0) return;
             update_cell(sender, e);
         }
         private void pictureBox_MouseDown(object sender, MouseEventArgs e) {
-            if (timer.Enabled) return;
+            if (timer.Enabled || step_back != 0) return;
             update_cell(sender, e);
         }
         private void remove_cell_type(){
