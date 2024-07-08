@@ -76,7 +76,7 @@ namespace cocojambo {
                 for (int jj = -1; jj < 2; jj++) {
                     int col = (i + ii + field_size) % field_size;
                     int row = (j + jj + field_size) % field_size;
-                    bool selected_cell = i == row && j == col;
+                    bool selected_cell = i == row && j == col || (ii+jj)%2 == 0;
                     if (!selected_cell) {
                         neighbors_cells[field[col, row].type].count += 1;
                         neighbors_cells[field[col, row].type].pos.Add((col, row));
@@ -88,8 +88,8 @@ namespace cocojambo {
             switch (type)
             {
                 case 0: {
-                        if (chance_result(1)) 
-                            return 1;
+                        /*if (chance_result(1)) 
+                            return 1;*/
                         break;
                 }
                 case 1: {
@@ -143,16 +143,16 @@ namespace cocojambo {
                     Dictionary<int, Neighbors> neighbors_cells = new Dictionary<int, Neighbors>();
                     neighbors_cells = neighbors(i, j);
                     int evo;
-                    switch (field_copy[i,j].type) 
+                    switch (field[i,j].type) 
                     {
                         case 0: {
                                 evo = evolution(field[i, j].type);
-                                if (evo != field_copy[i, j].type && field[i, j].type == 0)
+                                if (evo != field_copy[i, j].type && field_copy[i, j].type == 0)
                                     field_copy[i, j] = new Cell(evo);
                                 break;
                         }
                         case 1: {
-                                if (death(field[i, j])){
+                                if (death(field_copy[i, j])){
                                     field_copy[i, j] = new Cell();
                                     break;
                                 }
@@ -174,7 +174,7 @@ namespace cocojambo {
                                 break;
                         }
                         case 2: {
-                                if (death(field[i, j])) {
+                                if (death(field_copy[i, j])) {
                                     field_copy[i, j] = new Cell();
                                     break;
                                 }
@@ -194,7 +194,7 @@ namespace cocojambo {
                                 break;
                         }
                         case 3: {
-                                if (death(field[i, j])){
+                                if (death(field_copy[i, j])){
                                     field_copy[i, j] = new Cell();
                                     break;
                                 }
@@ -203,7 +203,7 @@ namespace cocojambo {
                                 break;
                         }
                         case 4: {
-                                if (death(field[i, j])){
+                                if (death(field_copy[i, j])){
                                     field_copy[i, j] = new Cell();
                                     break;
                                 }

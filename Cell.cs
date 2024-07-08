@@ -29,7 +29,7 @@ namespace cocojambo {
                         brush = Brushes.Green;
 
                         reproduction = 0;
-                        reproduction_chance = 10000;
+                        reproduction_chance = 5000;
                         age = 0;
                         age_death = 1000000;
                         death_chance = 0;
