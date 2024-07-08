@@ -11,7 +11,9 @@ namespace cocojambo {
         private Cell[][,] field_buf;
         private int field_size;
         public int field_buf_memory { get; private set; }
+        public int generation { get; private set; }
         public Game(int field_size) {
+            generation = 0;
             this.field_size = field_size;
             field_buf_memory = 0;
             field = new Cell[field_size, field_size];
@@ -54,7 +56,7 @@ namespace cocojambo {
         }
 
         private bool chance_result(int chance) {
-            return random.Next(1, 101) <= chance;
+            return random.Next(1, 1001) <= chance;
         }
         public class Neighbors {
             public int count;
@@ -117,6 +119,7 @@ namespace cocojambo {
             field_buf[0] = field;
             field = field_copy;
             if (field_buf_memory < 10) field_buf_memory++;
+            generation++;
         }
     }
 }

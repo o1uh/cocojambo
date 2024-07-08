@@ -32,7 +32,7 @@ namespace cocojambo {
                         brush = Brushes.Green;
 
                         reproduction = 0;
-                        reproduction_chance = 30;
+                        reproduction_chance = 300;
                         age = 0;
                         age_death = 1000000;
                         death_chance = 0;
@@ -52,7 +52,7 @@ namespace cocojambo {
                         brush = Brushes.Blue;
 
                         reproduction = 1;
-                        reproduction_chance = 80;
+                        reproduction_chance = 800;
                         age = 0;
                         age_death = 100;
                         death_chance = 0;
@@ -72,7 +72,7 @@ namespace cocojambo {
                         brush = Brushes.Red;
 
                         reproduction = 1;
-                        reproduction_chance = 40;
+                        reproduction_chance = 400;
                         age = 0;
                         age_death = 50;
                         death_chance = 0;

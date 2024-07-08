@@ -27,6 +27,13 @@ namespace cocojambo {
         private void b_stop_Click(object sender, EventArgs e) {
             game_stop();
         }
+        private void update_text() {
+            if (step_back == 0) { 
+                Text = $"Поколение: {game.generation}";
+                return;
+            }
+            Text = $"Поколение: {game.generation - step_back} ({game.generation})";
+        }
         private void timer_Tick(object sender, EventArgs e) {
             game.next_generation();
             field_update(game.get_field());
@@ -87,6 +94,7 @@ namespace cocojambo {
                 for (int j = 0; j < field_size; j++)
                     graphics.FillRectangle(field[i, j].brush, i * cells_size + indent, j * cells_size + indent, cells_size - 1, cells_size - 1);
             pictureBox.Refresh();
+            update_text();
         }
         public Form1() {
             InitializeComponent();
@@ -187,8 +195,9 @@ namespace cocojambo {
         }
 
         private void b_now_Click(object sender, EventArgs e) {
-            field_update(game.get_field());
             step_back = 0;
+            field_update(game.get_field());
+            
         }
     }   
 }
