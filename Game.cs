@@ -88,8 +88,8 @@ namespace cocojambo {
             switch (type)
             {
                 case 0: {
-                        /*if (chance_result(1)) 
-                            return 1;*/
+                        if (chance_result(1))
+                            return 1;
                         break;
                 }
                 case 1: {
@@ -102,12 +102,12 @@ namespace cocojambo {
                         break;
                 }
                 case 2: {
-                        if (chance_result(1000))
+                        if (chance_result(6000))
                             return 4;
                         break;
                 }
                 case 3: {
-                        if (chance_result(4000))
+                        if (chance_result(9000))
                             return 4;
                         break;
                 }
@@ -143,28 +143,40 @@ namespace cocojambo {
                     Dictionary<int, Neighbors> neighbors_cells = new Dictionary<int, Neighbors>();
                     neighbors_cells = neighbors(i, j);
                     int evo;
+
+                    field_copy[i, j].age++;
+                    if (field_copy[i, j].type != 1 && field_copy[i, j].type != 0)
+                        field_copy[i, j].hunger += 10;
+                    if (field_copy[i, j].hunger < 100)
+                        field_copy[i, j].hp += 10;
+
+                    if (field_copy[i, j].hunger < 0)
+                        field_copy[i, j].hunger = 0;
+                    if (field_copy[i, j].hp > field_copy[i, j].hp_max)
+                        field_copy[i, j].hp = field_copy[i, j].hp_max;
+
                     switch (field[i,j].type) 
                     {
                         case 0: {
                                 evo = evolution(field[i, j].type);
-                                if (evo != field_copy[i, j].type && field_copy[i, j].type == 0)
+                                if (evo != field_copy[i, j].type && field_copy[i, j].type == field[i, j].type)
                                     field_copy[i, j] = new Cell(evo);
                                 break;
                         }
                         case 1: {
-                                if (death(field_copy[i, j])){
+                                if (death(field[i, j])){
                                     field_copy[i, j] = new Cell();
                                     break;
                                 }
 
                                 evo = evolution(field[i, j].type);
-                                if (evo != field[i, j].type) { 
+                                if (evo != field[i, j].type && field_copy[i, j].type == field[i, j].type) { 
                                     field_copy[i, j] = new Cell(evo);
                                     break;
                                 }
 
                                 if (neighbors_cells[0].count > 0) 
-                                    if (chance_result(field_copy[i, j].reproduction_chance)) {
+                                    if (chance_result(field_copy[i, j].reproduction_chance) && field_copy[i, j].type == field[i, j].type) {
                                         int rand_pos = random.Next(0, neighbors_cells[0].count);
                                         int x = neighbors_cells[0].pos[rand_pos].Item1;
                                         int y = neighbors_cells[0].pos[rand_pos].Item2;
@@ -174,27 +186,60 @@ namespace cocojambo {
                                 break;
                         }
                         case 2: {
-                                if (death(field_copy[i, j])) {
+                                if (death(field[i, j])) {
                                     field_copy[i, j] = new Cell();
                                     break;
                                 }
+                                if (field[i, j].hunger >= 100 && evolution(field[i, j].type) != field[i, j].type) {
+                                    field_copy[i, j] = new Cell(4);
+                                    field_copy[i, j].hunger = 100;
+                                    break;
+                                }
 
-                                if (neighbors_cells[3].count + neighbors_cells[4].count > 0)
-                                    if (neighbors_cells[1].count > 0) {
-                                        int rand_pos = random.Next(0, neighbors_cells[1].count);
-                                        int x = neighbors_cells[1].pos[rand_pos].Item1;
-                                        int y = neighbors_cells[1].pos[rand_pos].Item2;
-                                        if (fight(field[i, j], field[x, y])) {
-                                            field_copy[x, y] = field[i, j];
-                                            field_copy[i, j] = new Cell();
-                                            field_copy[x, y].hunger -= field_copy[x, y].atk;
-                                        }
+
+                                if (neighbors_cells[1].count > 0) {
+                                    int rand_pos = random.Next(0, neighbors_cells[1].count);
+                                    int x = neighbors_cells[1].pos[rand_pos].Item1;
+                                    int y = neighbors_cells[1].pos[rand_pos].Item2;
+                                    if (fight(field[i, j], field[x, y])) {
+                                        field_copy[x, y] = field[i, j];
+                                        field_copy[i, j] = new Cell();
+                                        field_copy[x, y].hunger = 0;
                                     }
+                                    break;
+                                }
+                                if (neighbors_cells[0].count > 0) {
+                                    int rand_pos = random.Next(0, neighbors_cells[0].count);
+                                    int x = neighbors_cells[0].pos[rand_pos].Item1;
+                                    int y = neighbors_cells[0].pos[rand_pos].Item2;
+                                    field_copy[x, y] = field[i, j];
+                                    field_copy[i, j] = new Cell();
+                                }
+                                if (neighbors_cells[3].count > 0) {
+                                    int rand_pos = random.Next(0, neighbors_cells[3].count);
+                                    int x = neighbors_cells[3].pos[rand_pos].Item1;
+                                    int y = neighbors_cells[3].pos[rand_pos].Item2;
+                                    if (fight(field[i, j], field[x, y])) {
+                                        field_copy[x, y] = field[i, j];
+                                        field_copy[i, j] = new Cell();
+                                    }
+                                    break;
+                                }
+                                if (neighbors_cells[4].count > 0) {
+                                    int rand_pos = random.Next(0, neighbors_cells[4].count);
+                                    int x = neighbors_cells[4].pos[rand_pos].Item1;
+                                    int y = neighbors_cells[4].pos[rand_pos].Item2;
+                                    if (fight(field[i, j], field[x, y])) {
+                                        field_copy[x, y] = field[i, j];
+                                        field_copy[i, j] = new Cell();
+                                    }
+                                    break;
+                                }
 
                                 break;
                         }
                         case 3: {
-                                if (death(field_copy[i, j])){
+                                if (death(field[i, j])){
                                     field_copy[i, j] = new Cell();
                                     break;
                                 }
@@ -203,7 +248,7 @@ namespace cocojambo {
                                 break;
                         }
                         case 4: {
-                                if (death(field_copy[i, j])){
+                                if (death(field[i, j])){
                                     field_copy[i, j] = new Cell();
                                     break;
                                 }
@@ -212,9 +257,7 @@ namespace cocojambo {
                                 break;
                         }
                     }
-                    field_copy[i, j].age++;
-                    if (field_copy[i, j].type != 1 || field_copy[i, j].type != 0)
-                        field_copy[i, j].hunger += 10;
+                    
 
                 }
 

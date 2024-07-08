@@ -95,7 +95,7 @@ namespace cocojambo {
                 }
             }
         }
-        public static Cell operator ++(Cell cell) { cell.age++; return cell; }
+       
 
         
     }
