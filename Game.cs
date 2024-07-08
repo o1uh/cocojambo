@@ -8,13 +8,20 @@ namespace cocojambo {
     public class Game {
         Random random = new Random();
         private Cell[,] field;
+        private Cell[][,] field_buf;
         private int field_size;
+        public int field_buf_memory { get; private set; }
         public Game(int field_size) {
             this.field_size = field_size;
+            field_buf_memory = 0;
             field = new Cell[field_size, field_size];
+            field_buf = new Cell[10][,];
+            
             for (int i = 0; i < field_size; i++)
                 for (int j = 0; j < field_size; j++)
                     field[i, j] = new Cell();
+            for (int i = 0; i < 10; i++)
+                field_buf[i] = field;
         }
 
         public Cell[,] get_field() {
@@ -23,6 +30,16 @@ namespace cocojambo {
                 for (int j = 0; j < field_size; j++)
                     field_copy[i, j] = field[i, j];
             return field_copy;
+        }
+        public Cell[,] get_field_memory(int n) {
+            if (n > 0) {
+                var field_copy = new Cell[field_size, field_size];
+                for (int i = 0; i < field_size; i++)
+                    for (int j = 0; j < field_size; j++)
+                        field_copy[i, j] = field_buf[n - 1][i, j];
+                return field_copy;
+            }
+            return get_field();
         }
         public void add_cell(int i, int j, int type) {
             if (validate_pos(i, j))
@@ -94,7 +111,12 @@ namespace cocojambo {
                         }
                     }   
                 }
+            for(int i = field_buf_memory - 1; i > 0; i--) {
+                field_buf[i] = field_buf[i - 1];
+            }
+            field_buf[0] = field;
             field = field_copy;
+            if (field_buf_memory < 10) field_buf_memory++;
         }
     }
 }

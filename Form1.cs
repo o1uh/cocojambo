@@ -19,6 +19,7 @@ namespace cocojambo {
         private int indent;
         private int cell_type;
         private int speed;
+        private int step_back;
 
         private void b_start_Click(object sender, EventArgs e) {
             game_start();
@@ -28,7 +29,7 @@ namespace cocojambo {
         }
         private void timer_Tick(object sender, EventArgs e) {
             game.next_generation();
-            field_update();
+            field_update(game.get_field());
         }
         private void field_create() {
             cell_type = 0;
@@ -39,12 +40,12 @@ namespace cocojambo {
             indent = (field_hw - cells_size * field_size) / 2;
 
             game = new Game(field_size);
-            
+            step_back = 0;
 
             pictureBox.Image = new Bitmap(field_hw, field_hw);
             graphics = Graphics.FromImage(pictureBox.Image);
 
-            field_update();
+            field_update(game.get_field());
         }
         private void game_start() {
             b_green.Enabled = false;
@@ -80,9 +81,8 @@ namespace cocojambo {
             return;
         }
         
-        private void field_update() { 
+        private void field_update(Cell[,] field) { 
             graphics.Clear(Color.Black);
-            var field = game.get_field();
             for (int i = 0; i < field_size; i++)
                 for (int j = 0; j < field_size; j++)
                     graphics.FillRectangle(field[i, j].brush, i * cells_size + indent, j * cells_size + indent, cells_size - 1, cells_size - 1);
@@ -107,13 +107,13 @@ namespace cocojambo {
                 int i = (e.X - indent) / cells_size;
                 int j = (e.Y - indent) / cells_size;
                 game.add_cell(i, j, cell_type);
-                field_update();
+                field_update(game.get_field());
             }
             if (e.Button == MouseButtons.Right && e.Y < field_hw && e.X < field_hw) {
                 int i = (e.X - indent) / cells_size;
                 int j = (e.Y - indent) / cells_size;
                 game.delete_cell(i, j);
-                field_update();
+                field_update(game.get_field());
             }
         }
         private void pictureBox_MouseMove(object sender, MouseEventArgs e) {
@@ -161,6 +161,34 @@ namespace cocojambo {
 
         private void bar_speed_Scroll(object sender, EventArgs e) {
             timer.Interval = speed / bar_speed.Value;
+        }
+
+        private void b_next_Click(object sender, EventArgs e) {
+            if (step_back == 0) { 
+                game.next_generation();
+                field_update(game.get_field());
+            }
+            if (step_back == 1)
+            {
+                step_back--;
+                field_update(game.get_field());
+            }
+            if (step_back > 1){
+                step_back--;
+                var field = game.get_field_memory(step_back);
+                field_update(field);
+            }
+        }
+
+        private void b_back_Click(object sender, EventArgs e) {
+            if (step_back < 10 && step_back < game.field_buf_memory) step_back++;
+            var field = game.get_field_memory(step_back);
+            field_update(field);
+        }
+
+        private void b_now_Click(object sender, EventArgs e) {
+            field_update(game.get_field());
+            step_back = 0;
         }
     }   
 }
