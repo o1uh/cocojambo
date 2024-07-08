@@ -16,10 +16,7 @@ namespace cocojambo {
         public int age_death            { get; private set; }
         public int death_chance;
 
-        public int view_radius          { get; private set; }
-        public string agression         { get; private set; }
-        public bool escape;
-        public bool hunt;
+        public int[] target;
         public int hunger;
         public int hp_max               { get; private set; }
         public int hp;
@@ -32,18 +29,14 @@ namespace cocojambo {
                         brush = Brushes.Green;
 
                         reproduction = 0;
-                        reproduction_chance = 300;
+                        reproduction_chance = 10000;
                         age = 0;
                         age_death = 1000000;
                         death_chance = 0;
 
-                        view_radius = 0;
-                        agression = "none";
-                        escape = false;
-                        hunt = false;
                         hunger = 0;
-                        hp_max = 25;
-                        hp = 25;
+                        hp_max = 30;
+                        hp = 30;
                         atk = 0;
 
                         break; 
@@ -52,19 +45,15 @@ namespace cocojambo {
                         brush = Brushes.Blue;
 
                         reproduction = 1;
-                        reproduction_chance = 800;
+                        reproduction_chance = 8000;
                         age = 0;
                         age_death = 100;
                         death_chance = 0;
 
-                        view_radius = 1;
-                        agression = "def";
-                        escape = false;
-                        hunt = false;
                         hunger = 0;
                         hp_max = 100;
                         hp = 100;
-                        atk = 10;
+                        atk = 30;
 
                         break;
                 }
@@ -72,19 +61,15 @@ namespace cocojambo {
                         brush = Brushes.Red;
 
                         reproduction = 1;
-                        reproduction_chance = 400;
+                        reproduction_chance = 4000;
                         age = 0;
                         age_death = 50;
                         death_chance = 0;
 
-                        view_radius = 1;
-                        agression = "other";
-                        escape = false;
-                        hunt = false;
                         hunger = 0;
                         hp_max = 150;
                         hp = 150;
-                        atk = 15;
+                        atk = 50;
 
                         break;
                 }
@@ -92,25 +77,20 @@ namespace cocojambo {
                         brush = Brushes.Gray;
 
                         reproduction = 1;
-                        reproduction_chance = 60;
+                        reproduction_chance = 600;
                         age = 0;
                         age_death = 70;
                         death_chance = 0;
 
-                        view_radius = 1;
-                        agression = "all";
-                        escape = false;
-                        hunt = true;
                         hunger = 0;
                         hp_max = 150;
                         hp = 150;
-                        atk = 20;
+                        atk = 50;
 
                         break;
                 }
                 default: {
                         brush = Brushes.White;
-                        reproduction_chance = 1;
                         break;
                 }
             }
