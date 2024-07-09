@@ -10,7 +10,7 @@ namespace cocojambo {
         public int type                 { get; private set; }
         public Brush brush              { get; private set; }
 
-        public int reproduction         { get; private set; }
+        public bool reproduction;         
         public int reproduction_chance  { get; private set; }
         public int age;
         public int age_death            { get; private set; }
@@ -27,8 +27,6 @@ namespace cocojambo {
             {
                 case 1: {
                         brush = Brushes.Green;
-
-                        reproduction = 0;
                         reproduction_chance = 5000;
                         age = 0;
                         age_death = 1000000;
@@ -44,7 +42,7 @@ namespace cocojambo {
                 case 2: {
                         brush = Brushes.Blue;
 
-                        reproduction = 1;
+                        reproduction = true;
                         reproduction_chance = 8000;
                         age = 0;
                         age_death = 100;
@@ -60,7 +58,7 @@ namespace cocojambo {
                 case 3: {
                         brush = Brushes.Red;
 
-                        reproduction = 1;
+                        reproduction = true;
                         reproduction_chance = 4000;
                         age = 0;
                         age_death = 50;
@@ -76,7 +74,7 @@ namespace cocojambo {
                 case 4: {
                         brush = Brushes.Gray;
 
-                        reproduction = 1;
+                        reproduction = true;
                         reproduction_chance = 600;
                         age = 0;
                         age_death = 70;

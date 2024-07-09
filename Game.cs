@@ -133,11 +133,20 @@ namespace cocojambo {
             return false;
         }
         public void next_generation() {
+
             var field_copy = new Cell[field_size, field_size];
             for (int i = 0; i < field_size; i++)
                 for (int j = 0; j < field_size; j++)
                     field_copy[i, j] = field[i, j];
 
+            /*for(int i = field_buf_memory - 1; i > 0; i--) {
+                field_buf[i] = field_buf[i - 1];
+            }
+            field_buf[0] = field;
+            field = field_copy;
+            if (field_buf_memory < 10) field_buf_memory++;
+            generation++;
+*/
             for (int i = 0; i < field_size; i++)
                 for (int j = 0; j < field_size; j++) {
                     Dictionary<int, Neighbors> neighbors_cells = new Dictionary<int, Neighbors>();
@@ -164,7 +173,7 @@ namespace cocojambo {
                                 break;
                         }
                         case 1: {
-                                if (death(field[i, j])){
+                                if (death(field[i, j]) && field_copy[i, j].type == field[i, j].type) {
                                     field_copy[i, j] = new Cell();
                                     break;
                                 }
@@ -186,6 +195,7 @@ namespace cocojambo {
                                 break;
                         }
                         case 2: {
+                                
                                 if (death(field[i, j])) {
                                     field_copy[i, j] = new Cell();
                                     break;
@@ -195,7 +205,26 @@ namespace cocojambo {
                                     field_copy[i, j].hunger = 100;
                                     break;
                                 }
+                                if (neighbors_cells[2].count > 0 && neighbors_cells[0].count > 0 && field[i, j].reproduction) {
+                                    for (int k = 0; k < neighbors_cells[2].count; k++) {
+                                        int x = neighbors_cells[2].pos[k].Item1;
+                                        int y = neighbors_cells[2].pos[k].Item2;
+                                        if (field[x, y].reproduction && chance_result(field[i, j].reproduction_chance)) {
+                                            field[x, y].reproduction = false;
+                                            int rand_pos = random.Next(0, neighbors_cells[0].count);
+                                            x = neighbors_cells[0].pos[rand_pos].Item1;
+                                            y = neighbors_cells[0].pos[rand_pos].Item2;
+                                            neighbors_cells[0].pos.Remove((x, y));
+                                            neighbors_cells[2].pos.Add((x, y));
+                                            neighbors_cells[0].count--;
+                                            neighbors_cells[2].count++;
+                                            field_copy[x, y] = new Cell(2);
+                                            field[x, y].reproduction = false;
 
+                                        }
+                                    }
+                                    break;
+                                }
 
                                 if (neighbors_cells[1].count > 0) {
                                     int rand_pos = random.Next(0, neighbors_cells[1].count);
@@ -214,6 +243,7 @@ namespace cocojambo {
                                     int y = neighbors_cells[0].pos[rand_pos].Item2;
                                     field_copy[x, y] = field[i, j];
                                     field_copy[i, j] = new Cell();
+                                    break;
                                 }
                                 if (neighbors_cells[3].count > 0) {
                                     int rand_pos = random.Next(0, neighbors_cells[3].count);
@@ -239,6 +269,7 @@ namespace cocojambo {
                                 break;
                         }
                         case 3: {
+                                
                                 if (death(field[i, j])){
                                     field_copy[i, j] = new Cell();
                                     break;
@@ -248,6 +279,7 @@ namespace cocojambo {
                                 break;
                         }
                         case 4: {
+                                
                                 if (death(field[i, j])){
                                     field_copy[i, j] = new Cell();
                                     break;
@@ -257,8 +289,8 @@ namespace cocojambo {
                                 break;
                         }
                     }
-                    
 
+                    field[i, j].reproduction = true;
                 }
 
             for(int i = field_buf_memory - 1; i > 0; i--) {
