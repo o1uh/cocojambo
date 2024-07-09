@@ -220,7 +220,7 @@ namespace cocojambo {
                                             neighbors_cells[2].count++;
                                             field_copy[x, y] = new Cell(2);
                                             field[x, y].reproduction = false;
-
+                                            break;
                                         }
                                     }
                                     break;
