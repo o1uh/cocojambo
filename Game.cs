@@ -237,7 +237,7 @@ namespace cocojambo {
                                             {
                                                 int x = neighbors_cells[t].pos[k].Item1;
                                                 int y = neighbors_cells[t].pos[k].Item2;
-                                                if (turn[x, y])
+                                                if (turn[x, y] && chance_result(10000 / neighbors(x, y)[2].count))
                                                 {
                                                     if (fight(field[x, y], field[i, j]))
                                                     {
@@ -349,7 +349,7 @@ namespace cocojambo {
                                         {
                                             int x = neighbors_cells[4].pos[k].Item1;
                                             int y = neighbors_cells[4].pos[k].Item2;
-                                            if (turn[x,y] && neighbors(x, y)[2].count == 0)
+                                            if (turn[x,y] && neighbors(x, y)[2].count == 0 && chance_result(10000 / neighbors(x, y)[3].count))
                                             {
                                                 if (fight(field[x, y], field[i, j]))
                                                 {
@@ -489,7 +489,7 @@ namespace cocojambo {
                                         {
                                             int x = neighbors_cells[4].pos[k].Item1;
                                             int y = neighbors_cells[4].pos[k].Item2;
-                                            if (turn[x,y] && neighbors(x, y)[3].count == 0 && neighbors(x, y)[2].count == 0)
+                                            if (turn[x,y] && neighbors(x, y)[3].count == 0 && neighbors(x, y)[2].count == 0 && chance_result(10000 / neighbors(x, y)[4].count))
                                             {
                                                 if (fight(field[x, y], field[i, j]))
                                                 {
