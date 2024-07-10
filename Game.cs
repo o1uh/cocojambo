@@ -133,7 +133,10 @@ namespace cocojambo {
             return chance_result(5);
         }
         private bool fight(Cell cell1,Cell cell2) {
-            cell2.hp -= cell1.atk;
+            if (cell1.type > cell2.type)
+                cell2.hp -= 2*cell1.atk;
+            else
+                cell2.hp -= cell1.atk;
             if (death(cell2)) { 
                 cell2 = new Cell();
                 return true;
@@ -160,8 +163,7 @@ namespace cocojambo {
             if (field_buf_memory < 10) field_buf_memory++;
             generation++;
 
-            /*for (int i = 0; i < field_size; i++)
-                for (int j = 0; j < field_size; j++)*/
+           
             for (int j = 0; j < field_size; j++)
                 for (int i = 0; i < field_size; i++)
                 {
@@ -203,7 +205,6 @@ namespace cocojambo {
                                     if (evo != field[i, j].type && field_copy[i, j].type == field[i, j].type)
                                     {
                                         field_copy[i, j] = new Cell(evo);
-                                        /*occupied[i, j] = true;*/
                                         break;
                                     }
 
@@ -225,7 +226,6 @@ namespace cocojambo {
                                     if (death(field[i, j]))
                                     {
                                         field_copy[i, j] = new Cell();
-
                                         break;
                                     }
                                     if (field[i, j].hunger >= 100 && evolution(field[i, j].type) != field[i, j].type)
@@ -270,7 +270,9 @@ namespace cocojambo {
                                             field_copy[i, j] = new Cell();
                                             field_copy[x, y].hunger = 0;
                                             turn[x, y] = false;
+                                            break;
                                         }
+                                        turn[i, j] = false;
                                         break;
                                     }
                                     if (neighbors_cells[0].count > 0)
@@ -308,7 +310,112 @@ namespace cocojambo {
                                         field_copy[i, j] = new Cell();
                                         break;
                                     }
+                                    if (field[i, j].hunger >= 100 && evolution(field[i, j].type) != field[i, j].type)
+                                    {
+                                        field_copy[i, j] = new Cell(4);
+                                        field_copy[i, j].hunger = 100;
+                                        break;
+                                    }
 
+                                    if (neighbors_cells[3].count > 0 && neighbors_cells[0].count > 0 && field[i, j].reproduction)
+                                    {
+                                        for (int k = 0; k < neighbors_cells[3].count; k++)
+                                        {
+                                            int x = neighbors_cells[3].pos[k].Item1;
+                                            int y = neighbors_cells[3].pos[k].Item2;
+                                            if (field[x, y].reproduction && chance_result(field[i, j].reproduction_chance))
+                                            {
+                                                field_copy[x, y].reproduction = false;
+                                                int rand_pos = random.Next(0, neighbors_cells[0].count);
+                                                x = neighbors_cells[0].pos[rand_pos].Item1;
+                                                y = neighbors_cells[0].pos[rand_pos].Item2;
+                                                neighbors_cells[0].pos.Remove((x, y));
+                                                neighbors_cells[3].pos.Add((x, y));
+                                                neighbors_cells[0].count--;
+                                                neighbors_cells[3].count++;
+                                                field_copy[x, y] = new Cell(3);
+                                                field_copy[x, y].reproduction = false;
+                                                turn[x, y] = false;
+                                                break;
+                                            }
+                                        }
+                                        break;
+                                    }
+
+                                    if (neighbors_cells[2].count > 0)
+                                    {
+                                        int rand_pos = random.Next(0, neighbors_cells[2].count);
+                                        int x = neighbors_cells[2].pos[rand_pos].Item1;
+                                        int y = neighbors_cells[2].pos[rand_pos].Item2;
+                                        if (fight(field[i, j], field[x, y]))
+                                        {
+                                            field_copy[x, y] = field[i, j];
+                                            field_copy[i, j] = new Cell();
+                                            field_copy[x, y].hunger = 0;
+                                            turn[x, y] = false;
+                                            break;
+                                        }
+                                        turn[i, j] = false;
+                                        break;
+                                    }
+                                    if (neighbors_cells[1].count > 0)
+                                    {
+                                        int rand_pos = random.Next(0, neighbors_cells[1].count);
+                                        int x = neighbors_cells[1].pos[rand_pos].Item1;
+                                        int y = neighbors_cells[1].pos[rand_pos].Item2;
+                                        if (fight(field[i, j], field[x, y]))
+                                        {
+                                            field_copy[x, y] = field[i, j];
+                                            field_copy[i, j] = new Cell();
+                                            field_copy[x, y].hunger -= 5;
+                                            turn[x, y] = false;
+                                            break;
+                                        }
+                                        turn[i, j] = false;
+                                        break;
+                                    }
+                                    if (neighbors_cells[0].count > 0)
+                                    {
+                                        int rand_pos = random.Next(0, neighbors_cells[0].count);
+                                        int x = neighbors_cells[0].pos[rand_pos].Item1;
+                                        int y = neighbors_cells[0].pos[rand_pos].Item2;
+                                        field_copy[x, y] = field[i, j];
+                                        field_copy[i, j] = new Cell();
+                                        turn[x, y] = false;
+                                        break;
+                                    }
+                                    if (neighbors_cells[4].count > 0)
+                                    {
+                                        int rand_pos = random.Next(0, neighbors_cells[4].count);
+                                        int x = neighbors_cells[4].pos[rand_pos].Item1;
+                                        int y = neighbors_cells[4].pos[rand_pos].Item2;
+                                        if (fight(field[i, j], field[x, y]))
+                                        {
+                                            field_copy[x, y] = field[i, j];
+                                            field_copy[i, j] = new Cell();
+                                            field_copy[x, y].hunger = 0;
+                                            turn[x, y] = false;
+                                            break;
+                                        }
+                                        turn[i, j] = false;
+                                        break;
+                                    }
+                                    if (neighbors_cells[1].count > 0)
+                                    {
+                                        int rand_pos = random.Next(0, neighbors_cells[1].count);
+                                        int x = neighbors_cells[1].pos[rand_pos].Item1;
+                                        int y = neighbors_cells[1].pos[rand_pos].Item2;
+                                        if (fight(field[i, j], field[x, y]))
+                                        {
+                                            field_copy[x, y] = field[i, j];
+                                            field_copy[i, j] = new Cell();
+                                            field_copy[x, y].hunger -= 5;
+                                            turn[x, y] = false;
+                                            break;
+                                        }
+                                        turn[i, j] = false;
+                                        break;
+                                    }
 
                                     break;
                                 }
@@ -320,8 +427,33 @@ namespace cocojambo {
                                         field_copy[i, j] = new Cell();
                                         break;
                                     }
-
-
+                                    for (int t = 2; t <= 4; t++)
+                                        if (neighbors_cells[t].count > 0)
+                                        {
+                                            int rand_pos = random.Next(0, neighbors_cells[t].count);
+                                            int x = neighbors_cells[t].pos[rand_pos].Item1;
+                                            int y = neighbors_cells[t].pos[rand_pos].Item2;
+                                            if (fight(field[i, j], field[x, y]))
+                                            {
+                                                field_copy[x, y] = field[i, j];
+                                                field_copy[i, j] = new Cell();
+                                                field_copy[x, y].hunger = 0;
+                                                turn[x, y] = false;
+                                                break;
+                                            }
+                                            turn[i, j] = false;
+                                            break;
+                                        }
+                                    if (neighbors_cells[0].count > 0)
+                                    {
+                                        int rand_pos = random.Next(0, neighbors_cells[0].count);
+                                        int x = neighbors_cells[0].pos[rand_pos].Item1;
+                                        int y = neighbors_cells[0].pos[rand_pos].Item2;
+                                        field_copy[x, y] = field[i, j];
+                                        field_copy[i, j] = new Cell();
+                                        turn[x, y] = false;
+                                        break;
+                                    }
                                     break;
                                 }
                         }
