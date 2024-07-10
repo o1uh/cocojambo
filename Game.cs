@@ -133,7 +133,7 @@ namespace cocojambo {
             return chance_result(5);
         }
         private bool fight(Cell cell1,Cell cell2) {
-            if (cell1.type > cell2.type)
+            if (cell1.type > cell2.type && chance_result(8000))
                 cell2.hp -= 2*cell1.atk;
             else
                 cell2.hp -= cell1.atk;
@@ -312,26 +312,6 @@ namespace cocojambo {
                                         turn[x, y] = false;
                                         break;
                                     }
-                                    /*for (int t = 3; t <= 4; t++) 
-                                        if (neighbors_cells[t].count > 0)
-                                        {
-                                            for (int k = 0; k < neighbors_cells[t].count; k++)
-                                            {
-                                                int x = neighbors_cells[t].pos[k].Item1;
-                                                int y = neighbors_cells[t].pos[k].Item2;
-                                                if (turn[x, y])
-                                                {
-                                                    if (fight(field[x, y], field[i, j]))
-                                                    {
-                                                        field_copy[i, j] = field[x, y];
-                                                        field_copy[x, y] = new Cell();
-                                                    }
-                                                    turn[x, y] = false;
-                                                    break;
-                                                }
-                                            }
-                                        }*/
-
                                     break;
                                 }
                             case 3:
@@ -525,6 +505,22 @@ namespace cocojambo {
                                         }
                                     if (!turn[i, j])
                                         break;
+                                    if (neighbors_cells[1].count > 0)
+                                    {
+                                        int rand_pos = random.Next(0, neighbors_cells[1].count);
+                                        int x = neighbors_cells[1].pos[rand_pos].Item1;
+                                        int y = neighbors_cells[1].pos[rand_pos].Item2;
+                                        if (fight(field[i, j], field[x, y]))
+                                        {
+                                            field_copy[x, y] = field[i, j];
+                                            field_copy[i, j] = new Cell();
+                                            field_copy[x, y].hunger -= 5;
+                                            turn[x, y] = false;
+                                            break;
+                                        }
+                                        turn[i, j] = false;
+                                        break;
+                                    }
                                     if (neighbors_cells[0].count > 0)
                                     {
                                         int rand_pos = random.Next(0, neighbors_cells[0].count);
@@ -542,16 +538,8 @@ namespace cocojambo {
                         field_copy[i, j].reproduction = true;
                         field = field_copy;
                     }
-                    /*turn[i, j] = true;*/
+                    
                 }
-
-            /*for(int i = field_buf_memory - 1; i > 0; i--) {
-                field_buf[i] = field_buf[i - 1];
-            }
-            field_buf[0] = field;
-            field = field_copy;
-            if (field_buf_memory < 10) field_buf_memory++;
-            generation++;*/
         }
     }
 }

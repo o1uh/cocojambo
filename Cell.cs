@@ -14,9 +14,7 @@ namespace cocojambo {
         public int reproduction_chance  { get; private set; }
         public int age;
         public int age_death            { get; private set; }
-        public int death_chance;
 
-        public int[] target;
         public int hunger;
         public int hp_max               { get; private set; }
         public int hp;
@@ -30,7 +28,6 @@ namespace cocojambo {
                         reproduction_chance = 5000;
                         age = 0;
                         age_death = 1000000;
-                        death_chance = 0;
 
                         hunger = 0;
                         hp_max = 30;
@@ -46,7 +43,6 @@ namespace cocojambo {
                         reproduction_chance = 8000;
                         age = 0;
                         age_death = 100;
-                        death_chance = 0;
 
                         hunger = 0;
                         hp_max = 100;
@@ -62,7 +58,6 @@ namespace cocojambo {
                         reproduction_chance = 4000;
                         age = 0;
                         age_death = 50;
-                        death_chance = 0;
 
                         hunger = 0;
                         hp_max = 150;
@@ -78,7 +73,6 @@ namespace cocojambo {
                         reproduction_chance = 600;
                         age = 0;
                         age_death = 70;
-                        death_chance = 0;
 
                         hunger = 0;
                         hp_max = 150;

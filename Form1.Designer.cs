@@ -237,7 +237,7 @@
             this.b_now.Name = "b_now";
             this.b_now.Size = new System.Drawing.Size(80, 23);
             this.b_now.TabIndex = 9;
-            this.b_now.Text = "с";
+            this.b_now.Text = "возврат";
             this.b_now.UseVisualStyleBackColor = true;
             this.b_now.Click += new System.EventHandler(this.b_now_Click);
             // 
@@ -258,7 +258,7 @@
             this.b_back.Name = "b_back";
             this.b_back.Size = new System.Drawing.Size(100, 23);
             this.b_back.TabIndex = 7;
-            this.b_back.Text = "н";
+            this.b_back.Text = "назад";
             this.b_back.UseVisualStyleBackColor = true;
             this.b_back.Click += new System.EventHandler(this.b_back_Click);
             // 
@@ -268,7 +268,7 @@
             this.b_next.Name = "b_next";
             this.b_next.Size = new System.Drawing.Size(100, 23);
             this.b_next.TabIndex = 5;
-            this.b_next.Text = "в";
+            this.b_next.Text = "вперёд";
             this.b_next.UseVisualStyleBackColor = true;
             this.b_next.Click += new System.EventHandler(this.b_next_Click);
             // 
